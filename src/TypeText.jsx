@@ -13,17 +13,20 @@ export function TypeText() {
         'even', 'new', 'want', 'because', 'any', 'these', 'give', 'day', 'most', 'us'
     ];
 
-    
-
-
-
     return (
         <div className="test-text">
           {(() => {
             const renderedText = [];
             for (let i = 0; i < 30; i++) {
               const index = Math.floor(Math.random() * Text.length);
-              renderedText.push(<div key={i}>{Text[index]}</div>);
+              renderedText.push(<div key={i}>{(()=>{
+                const letters = [];
+                for(let i = 0; i < Text[index].length; i++){
+                  letters.push(<letter>{Text[index][i]}</letter>)
+
+                }
+                return letters;
+              })()}</div>);
             }
             return renderedText;
           })()}
