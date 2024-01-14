@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Header } from './Header'
 import './App.css'
-import { TypeText } from './TypeText'
+import { MainTestArea } from './MainTestArea'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Header />
-      <TypeText />
+      <MainTestArea />            
     </div>
   )
 }

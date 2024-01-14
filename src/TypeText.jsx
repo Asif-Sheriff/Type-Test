@@ -1,7 +1,9 @@
-export function TypeText() {
+import { useEffect, useMemo, useState } from "react";
+
+export function TypeText({currIndex}) {
 
     const Text = [
-        'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'I',
+        'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'i',
         'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at',
         'this', 'but', 'his', 'by', 'from', 'they', 'we', 'say', 'her', 'she',
         'or', 'an', 'will', 'my', 'one', 'all', 'would', 'there', 'their', 'what',
@@ -13,23 +15,37 @@ export function TypeText() {
         'even', 'new', 'want', 'because', 'any', 'these', 'give', 'day', 'most', 'us'
     ];
 
-    return (
-        <div className="test-text">
-          {(() => {
-            const renderedText = [];
-            for (let i = 0; i < 30; i++) {
-              const index = Math.floor(Math.random() * Text.length);
-              renderedText.push(<div key={i}>{(()=>{
-                const letters = [];
-                for(let i = 0; i < Text[index].length; i++){
-                  letters.push(<letter>{Text[index][i]}</letter>)
+    // const [stringOfText, setStringOfText] = useState([])
 
-                }
-                return letters;
-              })()}</div>);
-            }
-            return renderedText;
-          })()}
+
+    var stringOfText = [];
+
+    function renderText(stringOfText){
+      const renderedText = [];
+      for (let i = 0; i < 30; i++) {
+        const index = Math.floor(Math.random() * Text.length);
+        renderedText.push(<div key={i}>{(()=>{
+          const letters = [];
+          for(let i = 0; i < Text[index].length; i++){
+            letters.push(<letter>{Text[index][i]}</letter>)
+            stringOfText.push(Text[index][i])
+            
+          }
+          letters.push(<letter>*</letter>)
+          return letters;
+        })()}</div>);
+      }
+      console.log(stringOfText);
+      return renderedText;
+    }
+    
+    const renderedText = useMemo(()=>{
+      return renderText(stringOfText);      
+    },[]);
+
+    return (
+      <div className="test-text">
+          {renderedText}
         </div>
       );
 }
